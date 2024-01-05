@@ -5,17 +5,19 @@ import android.opengl.GLSurfaceView;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.smartelephantapps.minicraftandroid.game.MinicraftGame;
+
 public class MinicraftGLSurfaceView extends GLSurfaceView implements View.OnTouchListener {
 
     private final MinicraftGLRenderer renderer;
 
-    public MinicraftGLSurfaceView(Context context) {
+    public MinicraftGLSurfaceView(Context context, MinicraftGame game) {
         super(context);
 
         // Create an OpenGL ES 2.0 context
         setEGLContextClientVersion(2);
 
-        this.renderer = new MinicraftGLRenderer(context);
+        this.renderer = new MinicraftGLRenderer(context, game);
         this.setRenderer(this.renderer);
 
         // Set Renderer mode

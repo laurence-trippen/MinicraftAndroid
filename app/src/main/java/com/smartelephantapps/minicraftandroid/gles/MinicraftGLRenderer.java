@@ -5,6 +5,8 @@ import static android.opengl.GLES20.*;
 import android.content.Context;
 import android.opengl.GLSurfaceView;
 
+import com.smartelephantapps.minicraftandroid.game.MinicraftGame;
+
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
@@ -12,13 +14,18 @@ public class MinicraftGLRenderer implements GLSurfaceView.Renderer {
 
     private final Context context;
 
-    public MinicraftGLRenderer(Context context) {
+    private final MinicraftGame game;
+
+    public MinicraftGLRenderer(Context context, MinicraftGame game) {
         this.context = context;
+        this.game = game;
     }
 
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+
+        this.game.init();
     }
 
     @Override
@@ -31,5 +38,7 @@ public class MinicraftGLRenderer implements GLSurfaceView.Renderer {
         glClear(GL_COLOR_BUFFER_BIT);
 
         // Render here ...
+
+        this.game.tick();
     }
 }

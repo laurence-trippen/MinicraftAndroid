@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
         this.game = new MinicraftGame(this);
 
-        this.glView = new MinicraftGLSurfaceView(this);
+        this.glView = new MinicraftGLSurfaceView(this, game);
         setContentView(this.glView);
     }
 }

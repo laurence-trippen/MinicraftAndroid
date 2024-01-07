@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.opengl.GLUtils;
 
 import com.smartelephantapps.minicraftandroid.core.IBindable;
+import com.smartelephantapps.minicraftandroid.utils.BitmapUtils;
 
 public class Texture2D implements IBindable {
 
@@ -16,6 +17,8 @@ public class Texture2D implements IBindable {
     private int textureSlot = GL_TEXTURE0;
 
     public void load(Bitmap bitmap) throws Exception {
+        Bitmap flippedBitmap = BitmapUtils.flipBitmap(bitmap, true, false);
+
         glGenTextures(1, textureID, 0);
 
         if (textureID[0] == 0) {
@@ -29,7 +32,7 @@ public class Texture2D implements IBindable {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
         // Load bitmap into GPU memory
-        GLUtils.texImage2D(GL_TEXTURE_2D, 0, GL_RGBA, bitmap, 0);
+        GLUtils.texImage2D(GL_TEXTURE_2D, 0, GL_RGBA, flippedBitmap, 0);
 
         // Unbind texture
         glBindTexture(GL_TEXTURE_2D, 0);

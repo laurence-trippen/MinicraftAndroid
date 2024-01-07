@@ -6,7 +6,8 @@ import android.content.Context;
 import android.opengl.GLSurfaceView;
 
 import com.smartelephantapps.minicraftandroid.game.MinicraftGame;
-import com.smartelephantapps.minicraftandroid.renderer.TestRender;
+import com.smartelephantapps.minicraftandroid.renderer.tests.ITestRender;
+import com.smartelephantapps.minicraftandroid.renderer.tests.SpriteTestRender;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -17,13 +18,13 @@ public class MinicraftGLRenderer implements GLSurfaceView.Renderer {
 
     private final MinicraftGame game;
 
-    private final TestRender testRender;
+    private final ITestRender testRender;
 
     public MinicraftGLRenderer(Context context, MinicraftGame game) {
         this.context = context;
         this.game = game;
 
-        this.testRender = new TestRender(context);
+        this.testRender = new SpriteTestRender(context);
     }
 
     @Override

@@ -1,13 +1,14 @@
-package com.smartelephantapps.minicraftandroid.renderer;
+package com.smartelephantapps.minicraftandroid.renderer.tests;
 
 import static android.opengl.GLES20.*;
 
 import android.content.Context;
 
 import com.smartelephantapps.minicraftandroid.R;
+import com.smartelephantapps.minicraftandroid.renderer.Shader;
 import com.smartelephantapps.minicraftandroid.utils.BufferUtils;
 
-public class TestRender {
+public class TriangleTestRender implements ITestRender {
 
     private final Context context;
 
@@ -20,10 +21,11 @@ public class TestRender {
 
     private float color[] = { 0.63671875f, 0.76953125f, 0.22265625f, 1.0f };
 
-    public TestRender(Context context) {
+    public TriangleTestRender(Context context) {
         this.context = context;
     }
 
+    @Override
     public void init() {
         // Winding: CCW
         float[] vertices = new float[] {
@@ -39,7 +41,7 @@ public class TestRender {
         glBufferData(GL_ARRAY_BUFFER, sizeOfBytes, BufferUtils.createFloatBuffer(vertices), GL_STATIC_DRAW);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-        this.baseColorShader = new Shader(context, R.raw.test_render_vs, R.raw.test_render_fs);
+        this.baseColorShader = new Shader(context, R.raw.base_color_vs, R.raw.base_color_fs);
 
         this.baseColorShader.enable();
         this.positionAttribLocation = glGetAttribLocation(this.baseColorShader.getID(), "vPosition");
@@ -47,6 +49,7 @@ public class TestRender {
         this.baseColorShader.disable();
     }
 
+    @Override
     public void render() {
         this.baseColorShader.enable();
 
